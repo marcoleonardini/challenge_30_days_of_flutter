@@ -18,127 +18,28 @@ class HomePage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DayCard(
-                    day: 1,
-                  ),
-                  DayCard(
-                    day: 2,
-                  ),
-                  DayCard(
-                    day: 3,
-                  ),
-                  DayCard(
-                    day: 4,
-                  ),
-                  DayCard(
-                    day: 5,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DayCard(
-                    day: 6,
-                  ),
-                  DayCard(
-                    day: 7,
-                  ),
-                  DayCard(
-                    day: 8,
-                  ),
-                  DayCard(
-                    day: 9,
-                  ),
-                  DayCard(
-                    day: 10,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DayCard(day: 11),
-                  DayCard(day: 12),
-                  DayCard(day: 13),
-                  DayCard(day: 14),
-                  DayCard(day: 15),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DayCard(
-                    day: 16,
-                  ),
-                  DayCard(
-                    day: 17,
-                  ),
-                  DayCard(
-                    day: 18,
-                  ),
-                  DayCard(
-                    day: 19,
-                  ),
-                  DayCard(
-                    day: 20,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DayCard(
-                    day: 21,
-                  ),
-                  DayCard(
-                    day: 22,
-                  ),
-                  DayCard(
-                    day: 23,
-                  ),
-                  DayCard(
-                    day: 24,
-                  ),
-                  DayCard(
-                    day: 25,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DayCard(
-                    day: 26,
-                  ),
-                  DayCard(
-                    day: 27,
-                  ),
-                  DayCard(
-                    day: 28,
-                  ),
-                  DayCard(
-                    day: 29,
-                  ),
-                  DayCard(
-                    day: 30,
-                  ),
-                ],
-              ),
-              Text('Marco Leonardini'),
-              Text('@leonardini07'),
-              SizedBox(height: 12.0),
-              Text('Inspired in @faridaelchuzade'),
-            ],
+      body: Center(
+        child: Container(
+          width: 450,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Wrap(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children:
+                      List.generate(30, (index) => DayCard(day: index + 1))
+                          .toList(),
+                ),
+                SizedBox(height: 12),
+                Text('Marco Leonardini'),
+                Text('@leonardini07'),
+                SizedBox(height: 8.0),
+                Text('Inspired in @faridaelchuzade'),
+                SizedBox(height: 12),
+              ],
+            ),
           ),
         ),
       ),
@@ -158,6 +59,10 @@ class DayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = DateTime.now().day;
+    var color = Colors.black;
+    if (day > date) color = Colors.black54;
+    if (day < date) color = Colors.black26;
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -186,6 +91,7 @@ class DayCard extends StatelessWidget {
                 fontFamily: 'BadUnicornDemoRegular',
                 fontSize: 26.0,
                 fontWeight: FontWeight.w100,
+                color: color,
               ),
             ),
             SizedBox(height: 8.0),
