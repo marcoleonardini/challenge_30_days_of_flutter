@@ -5,6 +5,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
         backgroundColor: ThemeData().scaffoldBackgroundColor,
         elevation: 0.0,
@@ -60,56 +61,58 @@ class DayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final date = DateTime.now().day;
-    var color = Colors.black;
-    if (day > date) color = Colors.black54;
-    if (day < date) color = Colors.black26;
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          child: Center(
-            child: Material(
-              child: Padding(
-                padding: const EdgeInsets.all(26.0),
-                child: Text(
-                  'here',
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(12.0),
-        width: 90,
-        height: 120,
-        child: Column(
-          children: [
-            Text(
-              'Day: $day',
-              style: TextStyle(
-                fontFamily: 'BadUnicornDemoRegular',
-                fontSize: 26.0,
-                fontWeight: FontWeight.w100,
-                color: color,
-              ),
-            ),
-            SizedBox(height: 8.0),
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Blob.random(
-                  minGrowth: 8,
-                  edgesCount: 8,
-                  size: 52,
-                  styles: BlobStyles(
-                    color: kColors[day % 3],
+    double opacity = 1;
+    if (day > date) opacity = 0.5;
+    if (day < date) opacity = 0.30;
+    return Opacity(
+      opacity: opacity,
+      child: GestureDetector(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => Center(
+              child: Material(
+                child: Padding(
+                  padding: const EdgeInsets.all(26.0),
+                  child: Text(
+                    'here',
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8.0),
-          ],
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.all(12.0),
+          width: 90,
+          height: 120,
+          child: Column(
+            children: [
+              Text(
+                'Day: $day',
+                style: TextStyle(
+                  fontFamily: 'BadUnicornDemoRegular',
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.w100,
+                ),
+              ),
+              SizedBox(height: 8.0),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Blob.random(
+                    minGrowth: 8,
+                    edgesCount: 8,
+                    size: 52,
+                    styles: BlobStyles(
+                      color: kColors[day % 3],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 8.0),
+            ],
+          ),
         ),
       ),
     );
